@@ -23,6 +23,8 @@
 #ifndef SMSNOBREAK_H_
 #define SMSNOBREAK_H_
 
+#include <string>
+
 class SmsNobreak
 {
 	

@@ -23,6 +23,9 @@
 #ifndef SERIALACCESSER_H_
 #define SERIALACCESSER_H_
 
+#include <vector>
+#include <string>
+#include <SerialPort.h>
 typedef std::vector<unsigned char> ByteBuffer;
 
 class SerialAccesser

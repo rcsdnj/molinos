@@ -22,13 +22,10 @@
 #ifndef STDINCLUDES_H_
 #define STDINCLUDES_H_
 
-#include <SerialPort.h>
-#include <vector>
-#include <string>
-#include <ctime>
-#include <pthread.h>
 
+#include <pthread.h>
 #include <iostream>
+
 #define TRACE(str) std::cout << str << endl;
 
 inline void sleep_ms(long ms)
