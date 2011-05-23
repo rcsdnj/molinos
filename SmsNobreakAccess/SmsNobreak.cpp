@@ -206,7 +206,7 @@ bool SmsNobreak::StartMonitoring()
 	}
 	sleep_ms(1000);
 	StartPollingThread();
-	return true;
+	return _monitoringActive;
 }
 
 bool SmsNobreak::StopMonitoring()

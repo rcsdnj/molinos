@@ -31,10 +31,20 @@ void* nobreak_run(void* nobreak);
 int main(void)
 {
 	SmsNobreak* noBreak = new SmsNobreak("/dev/ttyUSB0");
-	noBreak->StartMonitoring();
+
+
 	while (true)
 	{
-		if (noBreak->IsMonitoring())
+		if (noBreak->StartMonitoring())
+		{
+			cout << "Monitoramento do no-break inicializado com sucesso." << endl;
+		}
+		else
+		{
+			cout << "Erro na inicialização do no-break!" << endl;
+		}
+
+		while (noBreak->IsMonitoring())
 		{
 			cout << "----" << endl;
 			cout << "Carga da bateria:      "
@@ -50,23 +60,21 @@ int main(void)
 			cout << endl;
 			cout << "Carga utilizada:       " << noBreak->GetOutputPowerLoad();
 			cout << endl;
+			sleep(1);
+		}
+		char shouldRestart;
+		cout << "----" << endl << "Monitoramento parou por algum problema inesperado. ";
+		cout << "Reiniciar? (S/N)";
+		cin >> shouldRestart;
+		cout << endl;
+		if (shouldRestart == 'S' || shouldRestart == 's')
+		{
+			continue;
 		}
 		else
 		{
-			char shouldRestart;
-			cout << "----" << endl << "Monitoramento parou por algum problema inesperado. ";
-			cout << "Reiniciar? (S/N)";
-			cin >> shouldRestart;
-			if (shouldRestart == 'S' || shouldRestart == 's')
-			{
-				noBreak->StartMonitoring();
-			}
-			else
-			{
-				break;
-			}
-			cout << endl;
+			break;
 		}
-		sleep(1);
+
 	}
 }
