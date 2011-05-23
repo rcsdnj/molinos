@@ -22,7 +22,7 @@
 #ifndef STDINCLUDES_H_
 #define STDINCLUDES_H_
 
-
+#include <unistd.h>
 #include <pthread.h>
 #include <iostream>
 
@@ -30,7 +30,10 @@
 
 inline void sleep_ms(long ms)
 {
-	usleep(ms * 1000);
+	if (usleep(ms * 1000) != 0)
+	{
+		std::cout << "Problem sleeping!";
+	}
 } 
 
 #endif /*STDINCLUDES_H_*/
