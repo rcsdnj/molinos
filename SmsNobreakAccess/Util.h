@@ -30,9 +30,7 @@
 
 inline void sleep_ms(long ms)
 {
-  const timespec ts = {ms / 1000, ms % 1000 * 1000000};
-  nanosleep(&ts, NULL);  
-	
+	usleep(ms * 1000);
 } 
 
 #endif /*STDINCLUDES_H_*/
