@@ -89,6 +89,7 @@ bool SmsNobreak::SendNobreakInitCommands()
 		{
 			return false;
 		}
+		sleep_ms(2000);
 	}
 	return true;
 }

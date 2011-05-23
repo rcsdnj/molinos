@@ -42,6 +42,7 @@ int main(void)
 		else
 		{
 			cout << "Erro na inicialização do no-break!" << endl;
+			break;
 		}
 
 		while (noBreak->IsMonitoring())
