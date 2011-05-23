@@ -138,7 +138,12 @@ void SmsNobreak::Polling()
 {
 	while (_monitoringActive)
 	{
-		QueryNobreakAndStoreData();
+		if (!QueryNobreakAndStoreData())
+		{
+			// some problem ocurred; since we currently don't know enough about
+			// the protocol to handle it, just stop monitoring
+			StopMonitoring();
+		}
 		sleep_ms(500);
 	}	
 }
@@ -214,6 +219,11 @@ bool SmsNobreak::StopMonitoring()
 		_serial.Close();
 	}
 	return wasWorking;
+}
+
+bool SmsNobreak::IsMonitoring()
+{
+	return _monitoringActive;
 }
 
 bool SmsNobreak::UsingAcPower()

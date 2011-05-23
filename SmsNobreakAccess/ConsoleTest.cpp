@@ -25,7 +25,7 @@
 #include "SmsNobreak.h"
 #include <iostream>
 #include <pthread.h>
-
+using namespace std;
 void* nobreak_run(void* nobreak);
 
 int main(void)
@@ -34,20 +34,39 @@ int main(void)
 	noBreak->StartMonitoring();
 	while (true)
 	{
-		std::cout << "----" << std::endl;
-		std::cout << "Carga da bateria:      "
-			<< noBreak->GetBatteryRemainingLevel();
-		std::cout << std::endl;
-		std::cout << "Tensão de entrada:     " << noBreak->GetInputVoltage();
-		std::cout << std::endl;
-		std::cout << "Tensão de saída:       " << noBreak->GetOutputVoltage();
-		std::cout << std::endl;
-		std::cout << "Temperatura:           " << noBreak->GetTemperature();
-		std::cout << std::endl;
-		std::cout << "Freqüência de entrada: " << noBreak->GetInputFrequency();
-		std::cout << std::endl;
-		std::cout << "Carga utilizada:       " << noBreak->GetOutputPowerLoad();
-		std::cout << std::endl;
+		if (noBreak->IsMonitoring())
+		{
+			cout << "----" << endl;
+			cout << "Carga da bateria:      "
+				<< noBreak->GetBatteryRemainingLevel();
+			cout << endl;
+			cout << "Tensão de entrada:     " << noBreak->GetInputVoltage();
+			cout << endl;
+			cout << "Tensão de saída:       " << noBreak->GetOutputVoltage();
+			cout << endl;
+			cout << "Temperatura:           " << noBreak->GetTemperature();
+			cout << endl;
+			cout << "Freqüência de entrada: " << noBreak->GetInputFrequency();
+			cout << endl;
+			cout << "Carga utilizada:       " << noBreak->GetOutputPowerLoad();
+			cout << endl;
+		}
+		else
+		{
+			char shouldRestart;
+			cout << "----" << endl << "Monitoramento parou por algum problema inesperado. ";
+			cout << "Reiniciar? (S/N)";
+			cin >> shouldRestart;
+			if (shouldRestart == 'S' || shouldRestart == 's')
+			{
+				noBreak->StartMonitoring();
+			}
+			else
+			{
+				break;
+			}
+			cout << endl;
+		}
 		sleep(1);
 	}
 }

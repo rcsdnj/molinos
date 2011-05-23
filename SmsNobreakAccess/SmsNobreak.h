@@ -36,6 +36,8 @@ public:
 
 	bool StopMonitoring();
 	
+	bool IsMonitoring();
+
 	bool UsingAcPower();
 	
 	float GetInputVoltage();
