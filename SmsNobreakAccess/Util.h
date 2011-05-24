@@ -28,12 +28,15 @@
 
 #define TRACE(str) std::cout << str << endl;
 
-inline void sleep_ms(long ms)
+inline void sleep_ms(long milisec)
 {
-	if (usleep(ms * 1000) != 0)
-	{
-		std::cout << "Problem sleeping!";
-	}
+	struct timespec req={0};
+	time_t sec=(int)(milisec/1000);
+	milisec=milisec-(sec*1000);
+	req.tv_sec=sec;
+	req.tv_nsec=milisec*1000000L;
+	while(nanosleep(&req,&req)==-1)
+		 continue;
 } 
 
 #endif /*STDINCLUDES_H_*/
